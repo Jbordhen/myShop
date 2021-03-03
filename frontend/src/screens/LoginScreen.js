@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import FormContainer from '../Component/FormContainer'
 import { login } from '../actions/userActions.js'
 import Message from '../Component/Message'
 import Loader from '../Component/Loader'
 
-const LoginScreen = (location) => {
+const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -16,14 +16,16 @@ const LoginScreen = (location) => {
     const { loading, error, userInfo } = userLogin
 
     const history = useHistory()
+    const location = useLocation()
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
         if (userInfo) {
-            console.log(redirect)
+            //console.log(location.search)
+            //console.log(redirect)
             history.push(redirect)
         }
-    }, [history, userInfo, redirect])
+    }, [history, userInfo, redirect, location])
 
     const submitHandler = (e) => {
         e.preventDefault()

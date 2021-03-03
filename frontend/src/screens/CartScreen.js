@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { Button, Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import { addToCart,removeFromCart } from '../actions/cartActions'
+import { addToCart, removeFromCart } from '../actions/cartActions'
 import Message from '../Component/Message'
 
 const CartScreen = ({ match, location }) => {
     const productId = match.params.id
-    const history=useHistory()
+    const history = useHistory()
 
     const quantity = location.search ? Number(location.search.split('=')[1]) : 1
 
