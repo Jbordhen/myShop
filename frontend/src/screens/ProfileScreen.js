@@ -110,70 +110,80 @@ const ProfileScreen = () => {
                     </Button>
                 </Form>
             </Col>
-            <Col md={9}>
-                <h2>My orders</h2>
-                {loadingOrders ? (
-                    <Loader />
-                ) : errorOrders ? (
-                    <Message variant='danger'>{errorOrders}</Message>
-                ) : (
-                    <Table
-                        striped
-                        bordered
-                        hover
-                        responsive
-                        className='table-sm'>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>DATE</th>
-                                <th>Total</th>
-                                <th>Paid</th>
-                                <th>Delivered</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {orders.map((order) => (
-                                <tr key={order._id}>
-                                    <td>{order._id}</td>
-                                    {console.log(order)}
-                                    <td>{order.timestamp}</td>
-                                    <td>{order.totalPrice}</td>
-                                    <td>
-                                        {order.isPaid ? (
-                                            order.paidAt.subString(0, 10)
-                                        ) : (
-                                            <i
-                                                className='fas fa-times'
-                                                style={{ color: 'red' }}></i>
-                                        )}
-                                    </td>
-                                    <td>
-                                        {order.isDelivered ? (
-                                            order.deliveredAt.subString(0, 10)
-                                        ) : (
-                                            <i
-                                                className='fas fa-times'
-                                                style={{ color: 'red' }}></i>
-                                        )}
-                                    </td>
-                                    <td>
-                                        <LinkContainer
-                                            to={`/order/${order._id}`}>
-                                            <Button
-                                                className='btn-sm'
-                                                variant='light'>
-                                                Details
-                                            </Button>
-                                        </LinkContainer>
-                                    </td>
+            {!userInfo.isAdmin && (
+                <Col md={9}>
+                    <h2>My orders</h2>
+                    {loadingOrders ? (
+                        <Loader />
+                    ) : errorOrders ? (
+                        <Message variant='danger'>{errorOrders}</Message>
+                    ) : (
+                        <Table
+                            striped
+                            bordered
+                            hover
+                            responsive
+                            className='table-sm'>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>DATE</th>
+                                    <th>Total</th>
+                                    <th>Paid</th>
+                                    <th>Delivered</th>
+                                    <th></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                )}
-            </Col>
+                            </thead>
+                            <tbody>
+                                {orders.map((order) => (
+                                    <tr key={order._id}>
+                                        <td>{order._id}</td>
+                                        <td>
+                                            {order.createdAt.subString(0, 10)}
+                                        </td>
+                                        <td>{order.totalPrice}</td>
+                                        <td>
+                                            {order.isPaid ? (
+                                                order.paidAt.subString(0, 10)
+                                            ) : (
+                                                <i
+                                                    className='fas fa-times'
+                                                    style={{
+                                                        color: 'red'
+                                                    }}></i>
+                                            )}
+                                        </td>
+                                        <td>
+                                            {order.isDelivered ? (
+                                                order.deliveredAt.subString(
+                                                    0,
+                                                    10
+                                                )
+                                            ) : (
+                                                <i
+                                                    className='fas fa-times'
+                                                    style={{
+                                                        color: 'red'
+                                                    }}></i>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <LinkContainer
+                                                to={`/order/${order._id}`}>
+                                                <Button
+                                                    className='btn-sm'
+                                                    variant='light'>
+                                                    Details
+                                                </Button>
+                                            </LinkContainer>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    )}
+                </Col>
+            )}
         </Row>
     )
 }

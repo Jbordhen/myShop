@@ -29,7 +29,7 @@ const OrderListScreen = () => {
     return (
         <Row>
             <Col md={9}>
-                <h2>My orders</h2>
+                <h2>Orders</h2>
                 {loading ? (
                     <Loader />
                 ) : error ? (
@@ -44,6 +44,7 @@ const OrderListScreen = () => {
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>USER</th>
                                 <th>DATE</th>
                                 <th>Total</th>
                                 <th>Paid</th>
@@ -55,11 +56,12 @@ const OrderListScreen = () => {
                             {orders.map((order) => (
                                 <tr key={order._id}>
                                     <td>{order._id}</td>
-                                    <td>{order.timestamp}</td>
-                                    <td>{order.totalPrice}</td>
+                                    <td>{order.user && order.user.name}</td>
+                                    <td>{order.createdAt.substring(0, 10)}</td>
+                                    <td>${order.totalPrice}</td>
                                     <td>
                                         {order.isPaid ? (
-                                            order.paidAt.subString(0, 10)
+                                            order.paidAt.substring(0, 10)
                                         ) : (
                                             <i
                                                 className='fas fa-times'
@@ -68,7 +70,7 @@ const OrderListScreen = () => {
                                     </td>
                                     <td>
                                         {order.isDelivered ? (
-                                            order.deliveredAt.subString(0, 10)
+                                            order.deliveredAt.substring(0, 10)
                                         ) : (
                                             <i
                                                 className='fas fa-times'

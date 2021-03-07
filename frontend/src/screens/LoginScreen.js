@@ -34,7 +34,7 @@ const LoginScreen = () => {
 
     return (
         <FormContainer>
-            <h1>Sing in</h1>
+            <h1>Sign in</h1>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
