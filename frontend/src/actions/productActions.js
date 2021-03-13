@@ -23,14 +23,16 @@ import {
     PRODUCT_UPDATE_SUCCESS
 } from '../constants/productConstants.js'
 
-export const listProducts = (keyword = '', pageNumber = '') => async (
-    dispatch
-) => {
+export const listProducts = (
+    keyword = '',
+    pageNumber = '',
+    sortBy = ''
+) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
         const { data } = await axios.get(
-            `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+            `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&sortBy=${sortBy}`
         )
 
         dispatch({

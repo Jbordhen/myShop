@@ -21,7 +21,7 @@ const ProductCarousel = () => {
     ) : error ? (
         <Message variant='danger'>{error}</Message>
     ) : (
-        <Carousel pause='hover' className='bg-dark' interval='3000'>
+        <Carousel pause='hover' className='bg-dark' interval={3000}>
             {products &&
                 products.map((product) => (
                     <Carousel.Item key={product._id}>
@@ -30,12 +30,12 @@ const ProductCarousel = () => {
                                 src={product.image}
                                 alt={product.name}
                                 style={{
-                                    'height': 300,
-                                    'padding': 30,
-                                    'margin': 40,
-                                    'border-radius': '50%',
-                                    'margin-left': 'auto',
-                                    'margin-right': 'auto'
+                                    height: 300,
+                                    padding: 30,
+                                    margin: 40,
+                                    borderRadius: '50%',
+                                    marginLeft: 'auto',
+                                    marginRight: 'auto'
                                 }}
                                 fluid
                             />

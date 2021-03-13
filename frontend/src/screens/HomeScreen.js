@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, ListGroup, Form } from 'react-bootstrap'
 import Product from '../Component/Product'
 import { listProducts } from '../actions/productActions.js'
 import Loader from '../Component/Loader.js'
@@ -14,14 +14,16 @@ const HomeScreen = ({ match }) => {
     const keyword = match.params.keyword
     const pageNumber = match.params.pageNumber || 1
 
+    const [sortBy, setSortBy] = useState(match.params.sortBy || '-createdAt')
+
     const dispatch = useDispatch()
 
     const productList = useSelector((state) => state.productList)
     const { loading, error, products, pages, page } = productList
 
     useEffect(() => {
-        dispatch(listProducts(keyword, pageNumber))
-    }, [dispatch, keyword, pageNumber])
+        dispatch(listProducts(keyword, pageNumber, sortBy))
+    }, [dispatch, keyword, pageNumber, sortBy])
 
     return (
         <>
@@ -33,7 +35,36 @@ const HomeScreen = ({ match }) => {
                     Go Back
                 </Link>
             )}
-            <h1>Latest Products</h1>
+            <Row>
+                <Col>
+                    <h1>Latest Products </h1>
+                </Col>
+                <Col md={3}>
+                    <ListGroup variant='flush'>
+                        <ListGroup.Item>
+                            <Form.Control
+                                as='select'
+                                style={{
+                                    width: 'auto'
+                                }}
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}>
+                                <option value='-createdAt'>
+                                    Sort By: Latest Products
+                                </option>
+                                <option value='price'>Price Low to High</option>
+                                <option value='-price'>
+                                    Price High to Low
+                                </option>
+                                <option value='-rating'>Average Rating</option>
+                                <option value='-numOfReviews'>
+                                    Most Reviews
+                                </option>
+                            </Form.Control>
+                        </ListGroup.Item>
+                    </ListGroup>
+                </Col>
+            </Row>
             {loading ? (
                 <Loader />
             ) : error ? (

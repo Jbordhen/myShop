@@ -110,7 +110,7 @@ const ProfileScreen = () => {
                     </Button>
                 </Form>
             </Col>
-            {!userInfo.isAdmin && (
+            {!userInfo?.isAdmin && (
                 <Col md={9}>
                     <h2>My orders</h2>
                     {loadingOrders ? (
