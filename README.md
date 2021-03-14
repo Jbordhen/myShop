@@ -15,7 +15,7 @@ E-commerce site using MERN stack
 
 `PORT`=`5000`
 
-`MONGODB_URI`=**mongodb database link**
+`MONGODB_URL`=**mongodb database link**
 
 `JWT_SECRET`=**Anything you want I guess**.
 
